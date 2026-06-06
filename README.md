@@ -47,4 +47,33 @@ kubectl apply -f ./kubernetes-intro/pod.yaml
 kubectl exec -n homework angie -- angie -T
 ```
 
+### 2. kubernetes-controlers
 
+```bash
+kubectl get nodes --show-labels
+```
+
+```bash
+kubectl label node minikube homework=true
+```
+
+```bash
+kubectl apply -f ./kubernetes-controllers
+```
+
+```bash
+kubectl rollout status deployment angie-deployment
+```
+
+```bash
+kubectl get pods -l app=angie -w
+```
+
+```bash
+kubectl get deployment angie-deployment -o yaml | grep -A5 strategy
+```
+
+
+```bash
+kubectl describe deployment angie-deployment
+```
