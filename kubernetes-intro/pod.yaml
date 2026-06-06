@@ -4,9 +4,56 @@ metadata:
   name: angie
   namespace: homework
 spec:
+
   containers:
   - name: nginx-fork
     image: docker.angie.software/angie:1.11.6-minimal
     ports:
     - containerPort: 8000
+    volumeMounts:
+    
+    - name: shared-index-html
+      mountPath: /homework
 
+    - name: angie-config
+      mountPath: /etc/angie/http.d/default.conf
+      subPath: default.conf
+
+    readinessProbe:
+      httpGet:
+        path: /
+        port: 8000
+      initialDelaySeconds: 3
+      periodSeconds: 5
+      timeoutSeconds: 2
+      failureThreshold: 3
+
+    livenessProbe:
+      httpGet:
+        path: /
+        port: 8000
+      initialDelaySeconds: 10
+      periodSeconds: 10
+      timeoutSeconds: 2
+      failureThreshold: 3
+
+
+  initContainers:
+  - name: wget-index-html
+    image: busybox:1.38.0
+    command:
+    - wget
+    - "-O"
+    - "/init/index.html"
+    - https://github.com/bralbral
+    volumeMounts:
+    - name: shared-index-html
+      mountPath: /init
+      
+  volumes:
+  - name: shared-index-html
+    emptyDir: {}
+
+  - name: angie-config
+    configMap:
+      name: angie-config
