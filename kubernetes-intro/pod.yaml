@@ -19,6 +19,14 @@ spec:
       mountPath: /etc/angie/http.d/default.conf
       subPath: default.conf
 
+    lifecycle:
+      preStop:
+        exec:
+          command:
+            - sh
+            - -c
+            - "rm -f /homework/index.html && sleep 5"
+
     readinessProbe:
       httpGet:
         path: /
@@ -49,7 +57,7 @@ spec:
     volumeMounts:
     - name: shared-index-html
       mountPath: /init
-      
+
   volumes:
   - name: shared-index-html
     emptyDir: {}
