@@ -7,17 +7,14 @@ metadata:
     app: angie
 spec:
   replicas: 3
-
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 1
-
   selector:
     matchLabels:
       app: angie
-      
   template:
     metadata:
       labels:
@@ -25,18 +22,17 @@ spec:
     spec:
       containers:
       - name: nginx-fork
-        image: docker.angie.software/angie:1.11.6-minimal 
+        image: docker.angie.software/angie:1.11.6-minimal
         ports:
         - containerPort: 8000
         volumeMounts:
-        
-        - name: shared-index-html
+        - name: shared-data 
           mountPath: /homework
-
         - name: angie-config
           mountPath: /etc/angie/http.d/default.conf
-          subPath: default.conf
-
+          subPath: angie-default.conf
+        - name: homework-conf
+          mountPath: /homework/conf
         lifecycle:
           preStop:
             exec:
@@ -44,7 +40,6 @@ spec:
                 - sh
                 - -c
                 - "rm -f /homework/index.html && sleep 5"
-
         readinessProbe:
           httpGet:
             path: /index.html
@@ -53,27 +48,23 @@ spec:
           periodSeconds: 5
           timeoutSeconds: 2
           failureThreshold: 3
-
-
       initContainers:
       - name: wget-index-html
         image: busybox:1.38.0
         command:
-        - wget
-        - "-O"
-        - "/init/index.html"
-        - https://github.com/bralbral
+        - sh
+        - -c
+        - wget -O /init/index.html https://github.com/bralbral
         volumeMounts:
-        - name: shared-index-html
+        - name: shared-data
           mountPath: /init
-
       volumes:
-      - name: shared-index-html
-        emptyDir: {}
-
-      - name: angie-config
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: homework-pvc
+      - name: angie-config 
         configMap:
-          name: angie-config
-
-
-      
+          name: config
+      - name: homework-conf
+        configMap:
+          name: config
