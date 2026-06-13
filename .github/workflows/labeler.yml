@@ -7,12 +7,10 @@ jobs:
   triage:
     runs-on: ubuntu-latest
     permissions:
-      contents: read        # To read the configuration file
-      pull-requests: write  # To add labels
-      issues: write         # Required for label operations
+      contents: read
+      pull-requests: write
     steps:
       - name: Label PR
-        uses: actions/labeler@v6
+        uses: actions/labeler@v4
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
-          sync-labels: true # Ensures labels are synced with your config
