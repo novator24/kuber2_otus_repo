@@ -226,7 +226,7 @@ server {
 ```
 
 ```bash
-kubectl exec -it angie-deployment-74789cf9f-7mlhk -- sh -c "echo 'FROM 8 EPISODE 14.06.2026' > /homework/test-pvc"
+kubectl exec -it angie-deployment-74789cf9f-7mlhk -- sh -c "echo 'The new episode 8 of From airs on June 14, 2026.' > /homework/test-pvc"
 ```
 
 ```bash
@@ -245,7 +245,7 @@ angie-deployment-74789cf9f-mhrks   1/1     Running   0          14m
 ```bash
 ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-volumes$ kubectl exec -it angie-deployment-74789cf9f-kmldh -- sh -c "cat /homework/test-pvc"
 Defaulted container "nginx-fork" out of: nginx-fork, wget-index-html (init)
-FROM 8 EPISODE 14.06.2026
+The new episode 8 of From airs on June 14, 2026.
 ```
 
 ```bash
@@ -265,5 +265,5 @@ angie-deployment-74789cf9f-62xzr   1/1     Running   0          16s
 angie-deployment-74789cf9f-gsknl   1/1     Running   0          16s
 ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-volumes$  kubectl exec -it angie-deployment-74789cf9f-62xzr -- sh -c "cat /homework/test-pvc"
 Defaulted container "nginx-fork" out of: nginx-fork, wget-index-html (init)
-HELLO FROM 14.06.2026
+The new episode 8 of From airs on June 14, 2026.
 ```
