@@ -1,48 +1,64 @@
 kubernetes-intro:
-  - kubernetes-intro/*
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-intro/*'
 
 kubernetes-controllers:
-  - kubernetes-controllers/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-controllers/*'
+
 kubernetes-security:
-  - kubernetes-security/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-security/*'
+
 kubernetes-debug:
-  - kubernetes-debug/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-debug/*'
+
 kubernetes-gitops:
-  - kubernetes-gitops/*
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-gitops/*'
 
 kubernetes-logging:
-  - kubernetes-logging/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-logging/*'
+
 kubernetes-monitoring:
-  - kubernetes-monitoring/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-monitoring/*'
+
 kubernetes-networks:
-  - kubernetes-networks/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-networks/*'
+
 kubernetes-operators:
-  - kubernetes-operators/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-operators/*'
+
 kubernetes-production-clusters:
-  - kubernetes-production-clusters/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-production-clusters/*'
+
 kubernetes-storage:
-  - kubernetes-storage/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-storage/*'
+
 kubernetes-templating:
-  - kubernetes-templating/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-templating/*'
+
 kubernetes-vault:
-  - kubernetes-vault/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-vault/*'
+
 kubernetes-volumes:
-  - kubernetes-volumes/*
-  
+  - changed-files:
+      - any-glob-match-pattern: 'kubernetes-volumes/*'
+
 Review Required:
-  - kubernetes-templating/*
-  - kubernetes-production-clusters/*
-  - kubernetes-monitoring/*
-  - kubernetes-logging/*
-  - kubernetes-debug/*
+  - changed-files:
+      - any-glob-match-pattern: 
+          - 'kubernetes-templating/*'
+          - 'kubernetes-production-clusters/*'
+          - 'kubernetes-monitoring/*'
+          - 'kubernetes-logging/*'
+          - 'kubernetes-debug/*'
