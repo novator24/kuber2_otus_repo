@@ -8,6 +8,7 @@ spec:
   selector:
     app: angie
   ports:
-    - port: 8000
+    - name: tcp
+      port: 8000
       targetPort: 8000
       protocol: TCP

@@ -103,7 +103,7 @@ helm uninstall traefik
 
 
 ```bash
-helm install traefik traefik/traefik --set providers.kubernetesGateway.enabled=true  --namespace traefik --create-namespace
+helm install traefik traefik/traefik --providers.kubernetesgateway=true
 ```
 
 
@@ -125,7 +125,7 @@ helm list -A
 
 
 ```bash
-kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.0/standard-install.yaml
+kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml
 ```
 
 

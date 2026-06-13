@@ -7,11 +7,24 @@ spec:
   parentRefs:
     - name: homework-gateway
       namespace: homework
-
   hostnames:
     - homework.otus
-
   rules:
+    # Правило для /homepage — полная замена пути на /index.html
+    - matches:
+        - path:
+            type: Exact
+            value: /homepage
+      filters:
+        - type: URLRewrite
+          urlRewrite:
+            path:
+              type: ReplaceFullPath
+              replaceFullPath: /index.html
+      backendRefs:
+        - name: angie-service
+          port: 8000
+
     - matches:
         - path:
             type: PathPrefix
