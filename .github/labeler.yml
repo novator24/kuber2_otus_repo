@@ -1,64 +1,48 @@
 kubernetes-intro:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-intro/*'
+  - kubernetes-intro/*
 
 kubernetes-controllers:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-controllers/*'
-
+  - kubernetes-controllers/*
+  
 kubernetes-security:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-security/*'
-
+  - kubernetes-security/*
+  
 kubernetes-debug:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-debug/*'
-
+  - kubernetes-debug/*
+  
 kubernetes-gitops:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-gitops/*'
+  - kubernetes-gitops/*
 
 kubernetes-logging:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-logging/*'
-
+  - kubernetes-logging/*
+  
 kubernetes-monitoring:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-monitoring/*'
+  - kubernetes-monitoring/*
 
 kubernetes-networks:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-networks/*'
-
+  - kubernetes-networks/*
+  
 kubernetes-operators:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-operators/*'
-
+  - kubernetes-operators/*
+  
 kubernetes-production-clusters:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-production-clusters/*'
-
+  - kubernetes-production-clusters/*
+  
 kubernetes-storage:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-storage/*'
-
+  - kubernetes-storage/*
+  
 kubernetes-templating:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-templating/*'
-
+  - kubernetes-templating/*
+  
 kubernetes-vault:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-vault/*'
-
+  - kubernetes-vault/*
+  
 kubernetes-volumes:
-  - changed-files:
-      - any-glob-match-pattern: 'kubernetes-volumes/*'
-
+  - kubernetes-volumes/*
+  
 Review Required:
-  - changed-files:
-      - any-glob-match-pattern: 
-          - 'kubernetes-templating/*'
-          - 'kubernetes-production-clusters/*'
-          - 'kubernetes-monitoring/*'
-          - 'kubernetes-logging/*'
-          - 'kubernetes-debug/*'
+  - kubernetes-templating/**
+  - kubernetes-production-clusters/**
+  - kubernetes-monitoring/**
+  - kubernetes-logging/**
+  - kubernetes-debug/**
