@@ -41,8 +41,8 @@ kubernetes-volumes:
   - kubernetes-volumes/*
   
 Review Required:
-  - kubernetes-templating/*
-  - kubernetes-production-clusters/*
-  - kubernetes-monitoring/*
-  - kubernetes-logging/*
-  - kubernetes-debug/*
+  - kubernetes-templating/**
+  - kubernetes-production-clusters/**
+  - kubernetes-monitoring/**
+  - kubernetes-logging/**
+  - kubernetes-debug/**
