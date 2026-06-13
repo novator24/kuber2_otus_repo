@@ -23,13 +23,9 @@ spec:
       labels:
         app: angie
     spec:
-      nodeSelector:
-        homework: "true"
-
       containers:
       - name: nginx-fork
-        image: docker.angie.software/angie:1.11.5-minimal
-        # image: docker.angie.software/angie:1.11.6-minimal 
+        image: docker.angie.software/angie:1.11.6-minimal 
         ports:
         - containerPort: 8000
         volumeMounts:
@@ -50,11 +46,9 @@ spec:
                 - "rm -f /homework/index.html && sleep 5"
 
         readinessProbe:
-          exec:
-            command:
-              - sh
-              - -c
-              - 'test -f /homework/index.html && [ "$(wc -c < /homework/index.html)" -gt 0 ]'
+          httpGet:
+            path: /index.html
+            port: 8000
           initialDelaySeconds: 3
           periodSeconds: 5
           timeoutSeconds: 2
