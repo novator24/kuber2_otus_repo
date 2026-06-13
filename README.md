@@ -93,7 +93,7 @@ ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-networks$ kubectl get gate
 error: the server doesn't have a resource type "gatewayclass"
 ```
 
-`kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml`
+- `kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.5.1/standard-install.yaml`
 
 ```bash
 ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-networks$ kubectl get gatewayclass
@@ -102,11 +102,10 @@ No resources found
 ```
 
 
-
-```bash
-helm repo add traefik https://traefik.github.io/charts && helm repo update && \
-helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./additional/helm/traefic-values.yaml
-```
+-   ```bash
+    helm repo add traefik https://traefik.github.io/charts && helm repo update && \
+    helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./additional/helm/traefic-values.yaml
+    ```
 
 
 ```bash
@@ -140,6 +139,9 @@ NAME      CONTROLLER                      ACCEPTED   AGE
 traefik   traefik.io/gateway-controller   True       81s
 ```
 
+
+- `kubectl apply -f gateway.yaml`
+
 ```bash
 ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-networks$ kubectl apply -f gateway.yaml 
 gateway.gateway.networking.k8s.io/homework-gateway created
@@ -147,6 +149,8 @@ ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-networks$ kubectl get gate
 NAME               CLASS     ADDRESS   PROGRAMMED   AGE
 homework-gateway   traefik                          12s
 ```
+
+- `kubectl apply -f service.yaml`
 
 ```bash
 ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-networks$ kubectl apply -f service.yaml 
@@ -156,6 +160,8 @@ NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 angie-service   ClusterIP   10.108.71.217   <none>        8000/TCP   2s
 ```
 
+
+- `kubectl apply -f httpRoute.yaml`
 
 ```bash
 ubuntu@ubuntu-MS-7C52:~/otus/bralbral_repo/kubernetes-networks$ kubectl apply -f httpRoute.yaml 
@@ -172,17 +178,13 @@ helm upgrade --install traefik traefik/traefik \
 ```
 
 
-```bash
+- ```bash
 echo "127.0.0.1 homework.otus" | sudo tee -a /etc/hosts
 ```
 
 
-```bash
-kubectl port-forward -n traefik service/traefik 8000:8000
-```
+- `kubectl port-forward -n traefik service/traefik 8000:8000`
 
-```bash
-curl http://homework.otus/index.html
-```
+- `curl http://homework.otus/index.html`
 
 
