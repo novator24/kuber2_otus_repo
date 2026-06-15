@@ -6,11 +6,9 @@ metadata:
 spec:
   parentRefs:
     - name: homework-gateway
-      namespace: homework
   hostnames:
     - homework.otus
   rules:
-    # Правило для /homepage — полная замена пути на /index.html
     - matches:
         - path:
             type: Exact
@@ -22,13 +20,12 @@ spec:
               type: ReplaceFullPath
               replaceFullPath: /index.html
       backendRefs:
-        - name: angie-service
-          port: 8000
-
+        - name: homework-service
+          port: 80
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: angie-service
-          port: 8000
+        - name: homework-service
+          port: 80
