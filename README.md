@@ -177,9 +177,17 @@ helm upgrade --install traefik traefik/traefik \
   -f ./additional/helm/traefic-values.yaml
 ```
 
+`kubectl get gateway -n homework`
+
+```bash
+ubuntu@ubuntu-MS-7C52:~$ kubectl get gateway -n homework
+NAME               CLASS     ADDRESS        PROGRAMMED   AGE
+homework-gateway   traefik   10.99.131.10   True         34m
+```
+
 
 - ```bash
-echo "127.0.0.1 homework.otus" | sudo tee -a /etc/hosts
+echo "10.99.131.10 homework.otus" | sudo tee -a /etc/hosts
 ```
 
 
