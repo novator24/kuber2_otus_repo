@@ -1,70 +1,86 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: angie-deployment
+  name: homework-deployment
   namespace: homework
-  labels:
-    app: angie
 spec:
   replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
       maxUnavailable: 1
+      maxSurge: 1
   selector:
     matchLabels:
-      app: angie
+      app: homework
   template:
     metadata:
       labels:
-        app: angie
+        app: homework
     spec:
+      initContainers:
+        - name: init-container
+          image: busybox
+          command:
+            - wget
+            - -O
+            - /init/index.html
+            - http://example.com
+          volumeMounts:
+            - name: homework-volume
+              mountPath: /init
       containers:
-      - name: nginx-fork
-        image: docker.angie.software/angie:1.11.6-minimal
-        ports:
-        - containerPort: 8000
-        volumeMounts:
-        - name: shared-data 
-          mountPath: /homework
-        - name: angie-config
-          mountPath: /etc/angie/http.d/default.conf
-          subPath: angie-default.conf
-        - name: homework-conf
-          mountPath: /homework/conf
-        lifecycle:
-          preStop:
+        - name: nginx
+          image: nginx:alpine
+          ports:
+            - containerPort: 8000
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - |
+              cat > /etc/nginx/conf.d/default.conf <<'EOF'
+              server {
+                listen 8000;
+                server_name localhost;
+
+                location / {
+                  root /usr/share/nginx/html;
+                  index index.html index.htm;
+                }
+
+                location /conf/ {
+                  alias /homework/conf/;
+                }
+              }
+              EOF
+              ln -sf /homework/index.html /usr/share/nginx/html/index.html
+              nginx -g 'daemon off;'
+          readinessProbe:
             exec:
               command:
-                - sh
+                - /bin/sh
                 - -c
-                - "rm -f /homework/index.html && sleep 5"
-        readinessProbe:
-          httpGet:
-            path: /index.html
-            port: 8000
-          initialDelaySeconds: 3
-          periodSeconds: 5
-          timeoutSeconds: 2
-          failureThreshold: 3
-      initContainers:
-      - name: wget-index-html
-        image: busybox:1.38.0
-        command:
-        - sh
-        - -c
-        - wget -O /init/index.html https://github.com/bralbral
-        volumeMounts:
-        - name: shared-data
-          mountPath: /init
+                - test -f /homework/index.html
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /bin/sh
+                  - -c
+                  - rm -f /homework/index.html
+          volumeMounts:
+            - name: homework-volume
+              mountPath: /homework
+            - name: homework-config-volume
+              mountPath: /homework/conf
+              readOnly: true
       volumes:
-      - name: shared-data
-        persistentVolumeClaim:
-          claimName: homework-pvc
-      - name: angie-config 
-        configMap:
-          name: config
-      - name: homework-conf
-        configMap:
-          name: config
+        - name: homework-volume
+          persistentVolumeClaim:
+            claimName: homework-pvc
+        - name: homework-config-volume
+          configMap:
+            name: homework-config
