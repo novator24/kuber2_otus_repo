@@ -201,7 +201,7 @@ echo "10.99.131.10 homework.otus" | sudo tee -a /etc/hosts
 - `minikube delete && minikube start`
 - `cd kubernetes-volumes`
 - `kubectl config set-context --current --namespace=homework`
-- `kubectl apply -f namespace.yaml && kubectl apply -f cm.yaml && kubectl apply -f pvc.yaml && kubectl apply -f deployment.yaml'
+- `kubectl apply -f namespace.yaml && kubectl apply -f cm.yaml && kubectl apply -f pvc.yaml && kubectl apply -f deployment.yaml`
 
 `kubectl get pods`
 
