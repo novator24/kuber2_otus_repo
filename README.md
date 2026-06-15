@@ -186,7 +186,7 @@ homework-gateway   traefik   10.99.131.10   True         34m
 ```
 
 
-- ```bash
+```bash
 echo "10.99.131.10 homework.otus" | sudo tee -a /etc/hosts
 ```
 
